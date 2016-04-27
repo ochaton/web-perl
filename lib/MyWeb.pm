@@ -21,6 +21,13 @@ get '/reg' => sub {
 	};
 };
 
+get '/auth' => sub {
+	template 'auth.tt',
+	{
+		'csrf_value' => 123123,
+	};
+}
+
 post '/reg' => sub {
 	my (@args) = @_;
 	
