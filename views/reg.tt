@@ -1,0 +1,47 @@
+<!--
+	This is registration page created for
+	project in Technosphera-perl.
+
+	Created by Orange Chaton Monday 18 April 2016.
+	Thanks for good wiki! :)
+
+-->
+<script type="text/javascript">
+	function checkForm() {
+		var form = document.forms["reg"];
+		if (form["password"] == form["passcheck"]) {
+			return true;
+		}
+		alert('Validation Failed: Passwords are not the same');
+		return false;
+	}
+</script>
+<div id="reg">
+		<form name="reg" method="POST" onsubmit="return checkForm()">
+			<div style="float: left; margin-left: 8px; margin-right: 8px;">
+				<div id="text"><p>
+						Your nickname: <br />
+						<input name="nick" id="reginput" required></input>
+				</p></div>
+				<div id="text"><p>
+					Your email:<br />
+					<input name="email" id="reginput" required></input>
+				</p></div>
+			</div>
+			<div style="float: left; margin-left: 8px; margin-right: 8px;">
+				<div id="text"><p>
+					Your password:<br />
+					<input name="password" type="password" id="reginput" required></input>
+				</p></div>
+				<div id="text"><p>
+					Confirm your password: <br />
+					<input name="passcheck" type="password" id="reginput" required></input>
+				</p></div>
+			</div>
+			<div style="clear: both;"></div>
+			<p>
+				<input name="button" type="submit" value="Send" id="sigbut"></input>
+			</p>
+			<input name="csrf" type="hidden" value="<% csrf_value %>">
+		</form>
+</div>	

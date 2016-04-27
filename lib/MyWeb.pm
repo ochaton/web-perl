@@ -15,7 +15,7 @@ get '/hello' => sub {
 };
 
 get '/reg' => sub {
-	template 'registration.tt',
+	template 'reg.tt',
 	{
 		'csrf_value' => 123123,
 	};
@@ -28,18 +28,48 @@ get '/auth' => sub {
 	};
 };
 
-post '/reg' => sub {
+post '/auth' => sub {
 	my (@args) = @_;
-	
-	use Data::Dumper;
-	use FindBin;
 
-	open (my $dh, '>', $FindBin::Bin . '/../logs.txt');
-	$dh->print(Dumper(\@args));
-	close($dh);
+	use DDP;
+	# (email, password, sig)
 
-	my $some_var = 123;
-	template 'ok'
+	my $email = params->{'email'};
+	my $password = params->{'password'};
+	my $sig = params->{'sig'};
+
+	use DBI;
+	my $dbh = DBI->connect('dbi:mysql:database=Sfera;' . 'host=localhost;port=3306', 'root', 'imagination');
+	my $sql = 'SELECT * FROM `users` WHERE email = ?';
+    my $sth = $dbh->prepare($sql) or die $dbh->errstr;
+    
+    $sth->execute(params->{'email'}) or die $sth->errstr;
+
+    my $row = $sth->fetchrow_hashref;
+    p $row;
+
+    if ( 
+    	defined $row and 
+    	$row->{'email'} eq params->{'email'} and
+    	$row->{'password'} eq params->{'password'}
+    ) 
+   	{
+		template 'ok',
+		{
+			'msg' => 'OK!',
+		};
+	}
+	else 
+	{
+		template 'auth',
+		{
+			'wrong_login_pass' => 'block',
+		};
+	}
 };
+
+post '/reg' => sub {
+	
+}
 
 true;

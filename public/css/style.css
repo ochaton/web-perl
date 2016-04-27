@@ -7,6 +7,12 @@ font-size: 13px;
 color: #333;
 }
 
+#text {
+	font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+	font-size: 13pt;
+	color: #555;
+}
+
 #auth {
 /* border: 1px solid; */
 /* border-color: #add; */
@@ -16,6 +22,18 @@ margin-top: 200px;
 padding: 8px;
 width: 220px;
 }
+
+#reg {
+/* border: 1px solid; */
+/* border-color: #add; */
+height: 100%;
+margin: auto;
+margin-top: 200px;
+padding: 8px;
+width: 600px;
+}
+
+
 #sigbut, #regbut {
 	border: none;
     border-radius: 8px;
@@ -49,7 +67,24 @@ width: 220px;
 	padding: 8px 12px;
 }
 
+#reginput {
+	border: 1px solid #ddd;
+	height: 20px;
+	font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+	font-size: 13pt;
+	padding: 8px 12px;	
+}
+
 #footer {
 	margin-top: 10px;
 	text-align: center;
+}
+
+#error_login {
+	margin-top: 0px;
+	margin-bottom: 0px;
+	text-align: center;
+	font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+	font-size: 11pt;
+	color: #600;
 }

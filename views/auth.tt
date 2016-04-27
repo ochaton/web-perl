@@ -1,14 +1,24 @@
         <div id="auth">
+            <script>
+                function signUp() {
+                    window.location.replace("/reg");
+                }
+            </script>
             <form name="auth" action="#" method="post">
                 <p>
-                    <input name="email" placeholder="Email..." id="input"></input>
+                    <input name="email" placeholder="Email..." id="input" required></input>
                 </p>
-                <p>
-                    <input name="password" type="password" placeholder="Password..." id="input"></input>
+                <p style="margin-bottom: 8px;"> <!-- Beauty fix -->
+                    <input name="password" type="password" placeholder="Password..." id="input" required></input>
                 </p>
+                <% IF wrong_login_pass %>
+                    <div id="error_login" >Wrong Login/Password</div>
+                <% ELSE %>
+                    <div style="height: 8px;"></div> <!-- Beauty fix -->
+                <% END %>
                 <p>
-                    <input name="button" type="submit" value="Sign In" id="sigbut"></input>
-                    <input name="button" type="submit" value="Sign Up" id="regbut"></input>
+                    <input name="sign_in" type="submit" value="Sign In" id="sigbut"></input>
+                    <input name="sign_up" type="button" value="Sign Up" id="regbut" onclick="signUp()"></button>
                 </p>
                     <input name="sig" type="hidden" value="<% sig %>"></input>
             </form>
