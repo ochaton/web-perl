@@ -7,14 +7,16 @@ font-size: 13px;
 color: #333;
 }
 
-#reg {
+#auth {
 /* border: 1px solid; */
 /* border-color: #add; */
+height: 100%;
 margin: auto;
+margin-top: 200px;
 padding: 8px;
 width: 220px;
 }
-#button, #regbut {
+#sigbut, #regbut {
 	border: none;
     border-radius: 8px;
     text-align: center;
@@ -25,7 +27,7 @@ width: 220px;
     margin-right: 5px;    
 }
 
-#button {
+#sigbut {
     background-color: #4CAF50; /* Green */
     color: white;
     padding: 15px 25px;
@@ -40,9 +42,14 @@ width: 220px;
 
 #input {
 	border: none;
-	border-bottom: 1px solid #eee;
+	border-bottom: 1px solid #ddd;
 	height: 30px;
 	font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
 	font-size: 13pt;
 	padding: 8px 12px;
+}
+
+#footer {
+	margin-top: 10px;
+	text-align: center;
 }

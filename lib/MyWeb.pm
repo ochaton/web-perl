@@ -26,7 +26,7 @@ get '/auth' => sub {
 	{
 		'csrf_value' => 123123,
 	};
-}
+};
 
 post '/reg' => sub {
 	my (@args) = @_;
