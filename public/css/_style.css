@@ -1,0 +1,48 @@
+body {
+margin: 0;
+margin-bottom: 25px;
+padding: 0;
+font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+font-size: 13px;
+color: #333;
+}
+
+#reg {
+/* border: 1px solid; */
+/* border-color: #add; */
+margin: auto;
+padding: 8px;
+width: 220px;
+}
+#button, #regbut {
+	border: none;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;    
+}
+
+#button {
+    background-color: #4CAF50; /* Green */
+    color: white;
+    padding: 15px 25px;
+}
+
+#regbut {
+	background-color: #e7e7e7; /* Gray */
+    color: black;
+    padding: 15px 20px;
+    float: right;
+}
+
+#input {
+	border: none;
+	border-bottom: 1px solid #eee;
+	height: 30px;
+	font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+	font-size: 13pt;
+	padding: 8px 12px;
+}

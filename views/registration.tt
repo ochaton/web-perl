@@ -1,0 +1,46 @@
+<!--
+	This is registration page created for
+	project in Technosphera-perl.
+
+	Created by Orange Chaton Monday 18 April 2016.
+	Thanks for good wiki! :)
+
+-->
+
+<div id="page">
+	<div id="content">
+		<form id="registration" method="POST">
+			<p>
+				Your name: <br />
+				<input name="name">
+				</input>
+			</p>
+			<p>
+				Your surname:<br />
+				<input name="surname">
+				</input>
+			</p>
+			<p>
+				Your email:<br />
+				<input name="email">
+				</input>
+			</p>
+			<p>
+				Your password:<br />
+				<input name="password" type="password">
+				</input>
+			</p>
+			<p>
+				Confirm your password: <br />
+				<input name="chechpassword" type="password">
+				</input>
+			</p>
+			<p>
+				<button name="OK">
+					OK
+				</button>
+			</p>
+			<input name="csrf" type="hidden" value="<% csrf_value %>">
+		</form>
+	</div>
+</div>	

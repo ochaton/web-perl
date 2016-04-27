@@ -1,0 +1,15 @@
+     <div id="reg">
+        <form name="auth" action="#" method="post">
+            <p>
+                <input name="email" placeholder="Email..." id="input"></input>
+            </p>
+            <p>
+                <input name="password" type="password" placeholder="Password..." id="input"></input>
+            </p>
+            <p>
+                <input name="button" type="submit" value="Sign In" id="sigbut"></input>
+                <input name="button" type="submit" value="Sign Up" id="regbut"></input>
+            </p>
+                <input name="sig" type="hidden" value="<% sig %>"></input>
+        </form>
+    </div>

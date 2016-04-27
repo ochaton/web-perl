@@ -1,0 +1,6 @@
+<div id="page">
+    <div id="content">
+        <h1>This is 'content'</h1>
+        <input name="csrf" value="<% value %>"></input>
+    </div>
+</div>
