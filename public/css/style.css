@@ -33,6 +33,39 @@ padding: 8px;
 width: 600px;
 }
 
+#user_page {
+border: 1px solid;
+border-color: #add;
+height: 100%;
+margin: auto;
+margin-top: 200px;
+padding: 8px;
+width: 600px;
+}
+
+#user_img {
+border: 1px solid;
+border-color: #add;
+border-radius: 100px;
+width: 200px;
+height: 200px;
+float: left;
+margin-right: 5px;
+}
+
+#user_text {
+border: 1px solid;
+border-color: #123;
+padding-left: 5px;
+padding-right: 5px;
+float:right;
+}
+
+#user_settings {
+margin-top: 5px;
+padding: 2px;
+border: 1px dotted #aaa;
+}
 
 #sigbut, #regbut {
 	border: none;
