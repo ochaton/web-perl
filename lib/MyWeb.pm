@@ -3,6 +3,8 @@ use Dancer2;
 
 our $VERSION = '0.1';
 
+set session => "Simple";
+
 use DBI;
 my $dbh = DBI->connect('dbi:mysql:database=Sfera;' . 'host=localhost;port=3306', 'root', 'imagination');
 
@@ -31,14 +33,30 @@ get '/auth' => sub {
 	};
 };
 
-get '/user' => sub {
+get '/user:id?' => sub {
+
+	my $sql = 'SELECT * FROM `users` WHERE id=?';
+	my $sth = $dbh->prepare($sql) or die $dbh->errstr;
+	$sth->execute(param('id')) or die $sth->errstr;
+
+	my $row = $sth->fetchrow_hashref;
+	warn 'get user' . param('id');
+	
+	use DDP;
+	p $row;
+
+	unless (defined $row) {
+		status 'not_found';
+		redirect '/404';
+		return;
+	}
 
 	template 'user_page.tt',
 	{
 		'user_img' => 'img_src',
-		'user_nick' => 'ochaton',
-		'user_email' => 'ochaton',
-		'user_token' => 'ochaton',
+		'user_nick' => $row->{'nick'},
+		'user_email' => $row->{'email'},
+		'user_token' => $row->{'token'},
 	}
 };
 
@@ -60,24 +78,21 @@ post '/auth' => sub {
     my $row = $sth->fetchrow_hashref;
     p $row;
 
-    if ( 
-    	defined $row and 
-    	$row->{'email'} eq params->{'email'} and
-    	$row->{'password'} eq params->{'password'}
-    ) 
-   	{
-		template 'ok',
-		{
-			'msg' => 'OK!',
-		};
-	}
-	else 
+	if (
+    	defined $row and
+    	$row->{'email'} eq $email and
+    	$row->{'PASSWORD'} eq $password
+    	) 
 	{
-		template 'auth',
+
+    	redirect '/user' . $row->{user_id};
+    }
+   	else {
+   		template 'auth',
 		{
 			'wrong_login_pass' => 'block',
 		};
-	}
+   	}
 };
 
 post '/reg' => sub {

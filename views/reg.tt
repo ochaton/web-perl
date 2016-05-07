@@ -6,7 +6,7 @@
 	Thanks for good wiki! :)
 
 -->
-<script type="text/javascript">
+<!-- <script type="text/javascript">
 	function checkForm() {
 		var form = document.forms["reg"];
 		if (form["password"] == form["passcheck"]) {
@@ -16,7 +16,7 @@
 		return false;
 	}
 </script>
-<div id="reg">
+ --><div id="reg">
 		<form name="reg" method="POST" onsubmit="return checkForm()">
 			<div style="float: left; margin-left: 8px; margin-right: 8px;">
 				<div id="text"><p>

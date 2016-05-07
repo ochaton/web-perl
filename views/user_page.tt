@@ -1,0 +1,56 @@
+<style>
+	#div {
+		font-size: 14px;
+		line-height: 1.4;
+	}
+	#image {
+		background-image: url("/images/ava.jpg");
+		background-size: cover;
+		background-position: 50% 50%;
+		background-repeat: no-repeat;
+		border-radius: 50%;
+		margin: 0 auto;
+		margin-top: -60px;
+		margin-bottom: 20px;
+		width: 120px;
+		height: 120px;
+	}
+	#name-headline {
+		padding-left: 20px;
+		padding-right: 20px;
+		text-align: center;
+		color: #666;
+	}
+	#name {
+		font-size: 20px;
+		line-height: 1.2;
+		text-transform: uppercase;
+		letter-spacing: 2px;
+		margin: 0;
+		margin-bottom: 10px;
+		color: #333;
+	}
+	#email, #token {
+		font-size: 16px;
+		line-height: 1.2;
+		font-weight: 700;
+		margin: 0;
+		outline: 0;
+	}
+</style>
+<div id="user_page">
+	<div id="image">
+		
+	</div>
+	<div id="name-headline">
+		<section>
+			<h1 id="name"><% user_nick %></h1>
+		</section>
+		<section>
+			<h1 id="email"><big>Email: </big><% user_email %></h1>
+		</section>
+		<section>
+			<h2 id="token"><big>Token: </big><% user_token %></h2>
+		</section>
+	</div>
+</div>
