@@ -49,20 +49,21 @@
 		<section>
 			<h1 id="email"><big>Email: </big><% user_email %></h1>
 		</section>
+		<% IF my_user_page %>
 		<section>
 			<h2 id="token"><big>Token: </big><% user_token %></h2>
 		</section>
-		<% IF my_user_page %>
 		<section>
-			<form method="post" name="get_token_form">
-				<p><input id="regbut" name="token_button" type="submit" value="Get New Token"></p>
-			</form>
+			<form method="post" name="user_action"><p>
+				<input id="extbut" name="exit_button" value="Exit" type="submit">
+				<input id="tokbut" name="token_button" type="submit" value="Get New Token">
+			</p></form>
 		</section>
-		<section>
-		<form method="post" name="exit_form">
-			<p><input id="sigbut" name="exit_button" value="Exit" type="submit"></p>
-		</form>
-		</section>
+		<% ELSE %>
+			<form method="post" name="user_action"><p>
+				<input id="hombut" name="home_button" value="Home" type="submit">
+			</p></form>
 		<% END %>
+		<div style="clear: both;"></div>
 	</div>
 </div>

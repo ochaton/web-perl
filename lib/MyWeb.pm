@@ -134,8 +134,10 @@ post '/user:id?' => sub {
         redirect '/';
     } 
     elsif ($request_body =~ m{^token_button}) { 
-        warn "LOOL";   
         get_next_token();
+        redirect '/';
+    }
+    elsif ($request_body =~ m{^home_button}) {
         redirect '/';
     }
     else {

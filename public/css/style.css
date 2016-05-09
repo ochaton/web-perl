@@ -39,6 +39,7 @@ border-color: #add;
 height: 100%;
 margin: auto;
 margin-top: 200px;
+margin-bottom: 20px;
 padding: 8px;
 width: 600px;
 }
@@ -78,17 +79,44 @@ border: 1px dotted #aaa;
     margin-right: 5px;    
 }
 
-#sigbut {
+#sigbut, #extbut, #hombut {
     background-color: #4CAF50; /* Green */
     color: white;
     padding: 15px 25px;
 }
 
-#regbut {
+#regbut, #tokbut {
 	background-color: #e7e7e7; /* Gray */
     color: black;
     padding: 15px 20px;
     float: right;
+}
+
+#extbut, #tokbut, #hombut {
+	border: none;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    float: left;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+#extbut {
+	margin-left: 200px;
+	float: left;
+}
+
+#hombut {
+	margin-left: 230px;
+	margin-bottom: -20px;
+}
+
+#tokbut {
+	margin-right: 120px;
+	float: right;
 }
 
 #input {
