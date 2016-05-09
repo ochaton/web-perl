@@ -60,13 +60,6 @@ get '/' => sub {
     }
 };
 
-get '/hello' => sub {
-    template 'hello.tt', 
-    {
-        'value' => 4156234,
-    };
-};
-
 get '/reg' => sub {
 
     template 'reg.tt',
