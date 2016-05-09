@@ -7,7 +7,35 @@ our $VERSION = '0.1';
 set session => 'YAML';
 
 use DBI;
+use DDP;
 my $dbh = DBI->connect('dbi:mysql:database=Sfera;' . 'host=localhost;port=3306', 'root', 'imagination');
+
+sub get_next_token {
+    my $user_id = session('user');
+
+    my $sql = 'SELECT * FROM `users` where id=?';
+    my $sth = $dbh->prepare($sql) or die $dbh->errstr;
+
+    $sth->execute($user_id) or die $sth->errstr;
+
+    my $row = $sth->fetchrow_hashref;
+    use Digest::SHA qw (sha256_hex);
+
+    my $str = "";
+    for (0..int(rand(25))) {
+        $str .= $row->{email};
+        $str .= $row->{nick};
+    }
+
+    $str .= localtime();
+
+    my $token = sha256_hex($str);
+    $sql = 'UPDATE `users` set token=? where id=?';
+    $sth = $dbh->prepare($sql) or die $dbh->errstr;
+
+    $sth->execute($token, $row->{id}) or die $sth->errstr;
+    p $token;
+}
 
 hook before => sub {
     if (!session('user') && 
@@ -94,12 +122,24 @@ get '/user:id?' => sub {
 };
 
 post '/user:id?' => sub {
-    if (session('user')) {
-        session user => undef;
-        redirect '/';
-    } else {
+    my $request_body = request->body();
+
+    unless (session('user')) {
         status 'not_found';
         redirect '/404';
+    }
+
+    if ($request_body =~ m{^exit_button}) {
+        session user => undef;
+        redirect '/';
+    } 
+    elsif ($request_body =~ m{^token_button}) { 
+        warn "LOOL";   
+        get_next_token();
+        redirect '/';
+    }
+    else {
+        redirect request->dispatch_path;
     }
 };
 
@@ -159,7 +199,7 @@ post '/reg' => sub {
     }
     
 
-    my $sql = 'SELECT * FROM `users` WHERE email=? and nick=?';
+    my $sql = 'SELECT * FROM `users` WHERE email=? or nick=?';
     my $sth = $dbh->prepare($sql) or die $dbh->errstr;
     
     $sth->execute(params->{email}, params->{nick}) or die $sth->errstr;
@@ -205,6 +245,8 @@ post '/reg' => sub {
             'message' => '502. Internal Error!',
         };
     };
+
+    get_next_token();
 
     session user => $row->{id};
     redirect '/user0';

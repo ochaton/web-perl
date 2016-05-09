@@ -54,8 +54,13 @@
 		</section>
 		<% IF my_user_page %>
 		<section>
-		<form method="post">
-			<p><button id="sigbut">Exit</button></p>
+			<form method="post" name="get_token_form">
+				<p><input id="regbut" name="token_button" type="submit" value="Get New Token"></p>
+			</form>
+		</section>
+		<section>
+		<form method="post" name="exit_form">
+			<p><input id="sigbut" name="exit_button" value="Exit" type="submit"></p>
 		</form>
 		</section>
 		<% END %>
