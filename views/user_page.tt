@@ -52,5 +52,12 @@
 		<section>
 			<h2 id="token"><big>Token: </big><% user_token %></h2>
 		</section>
+		<% IF my_user_page %>
+		<section>
+		<form method="post">
+			<p><button id="sigbut">Exit</button></p>
+		</form>
+		</section>
+		<% END %>
 	</div>
 </div>

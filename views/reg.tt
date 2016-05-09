@@ -6,18 +6,8 @@
 	Thanks for good wiki! :)
 
 -->
-<!-- <script type="text/javascript">
-	function checkForm() {
-		var form = document.forms["reg"];
-		if (form["password"] == form["passcheck"]) {
-			return true;
-		}
-		alert('Validation Failed: Passwords are not the same');
-		return false;
-	}
-</script>
- --><div id="reg">
-		<form name="reg" method="POST" onsubmit="return checkForm()">
+<div id="reg">
+		<form name="reg" method="POST" action="#">
 			<div style="float: left; margin-left: 8px; margin-right: 8px;">
 				<div id="text"><p>
 						Your nickname: <br />
@@ -39,6 +29,11 @@
 				</p></div>
 			</div>
 			<div style="clear: both;"></div>
+			<% IF wrong_form_data %>
+                    <div id="error_login" ><% message %></div>
+            <% ELSE %>
+                    <div style="height: 8px;"></div> <!-- Beauty fix -->
+            <% END %>
 			<p>
 				<input name="button" type="submit" value="Send" id="sigbut"></input>
 			</p>
