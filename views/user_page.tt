@@ -61,6 +61,10 @@
 	}
 </style>
 <% IF am_i_admin %>
+<div id="msg" style="margin-bottom: -100px;">
+	<h1>You're admin!</h1>
+	<h3>Be sure. Your actions can affect the other people!</h3>
+</div>
 <div id="admin_page">
 	<style>
 		#admin_sidebar {
@@ -102,9 +106,14 @@
 	</div>
 	<div id="user_settings">
 		<section>
+			<div id="msg" style="margin-top: -10px;">
+				<h1>System Settings</h1>
+			</div>
+		</section>
+		<section style="margin-top: -15px;">
 			<form method="post" name="user_action"><p>
-				<table valign="center>
-					<tr">
+				<table>
+					<tr style="margin-top: -5px;">
 						<td>
 							<h1 id="text">Nick:</h1>
 						</td>
@@ -112,7 +121,7 @@
 							<input name="change_nick" id="user_input" placeholder="<% user_nick %>">
 						</td>
 					</tr>
-					<tr>
+					<tr style="margin-top: -5px;">
 						<td>
 							<h1 id="text">Email:</h1>
 						</td>
@@ -138,9 +147,9 @@
 	</div>
 	<div id="user_settings">
 		<section>
-			<form method="post" name="user_action"><p>
-				<table valign="center>
-					<tr">
+			<form method="post" name="user_action">
+				<table style="margin-top: -5px;">
+					<tr>
 						<td>
 							<h1 id="text">Nick:</h1>
 						</td>
@@ -150,7 +159,7 @@
 					</tr>
 				</table>
 				<input id="sndbut" name="change_button" value="Send" type="submit">
-			</p></form>
+			</form>
 		</section>
 		<div style="clear: both;"></div>
 	</div>

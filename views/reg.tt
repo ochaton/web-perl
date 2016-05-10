@@ -12,7 +12,7 @@
 	}
 </style>
 <div id="msg" style="margin-top: 100px; margin-bottom: -100px;">
-	<a href="/" style="text-decoration: none; color: inherit;"><h1 style="text-align: center">New User? Realy?! O_o</h1></a>
+	<a href="/" style="text-decoration: none; color: inherit;"><h1>New User? Realy?! O_o</h1></a>
 </div>
 <div id="reg">
 		<form name="reg" method="POST" action="#">

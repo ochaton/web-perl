@@ -13,6 +13,10 @@ color: #333;
 	color: #555;
 }
 
+#msg {
+	text-align: center;
+}
+
 #auth {
 /* border: 1px solid; */
 /* border-color: #add; */
@@ -69,9 +73,8 @@ float:right;
 }
 
 #user_settings {
-margin-top: 15px;
-padding: 5px;
-border: 1px dotted #aaa;
+margin-top: 35px;
+padding: 6px;
 }
 
 #sigbut, #regbut {
@@ -82,7 +85,7 @@ border: 1px dotted #aaa;
     display: inline-block;
     font-size: 16px;
     margin-left: 5px;
-    margin-right: 5px;    
+    margin-right: 5px;  
 }
 
 #sigbut, #extbut, #hombut, #sndbut {
@@ -111,12 +114,12 @@ border: 1px dotted #aaa;
 }
 
 #extbut {
-	margin-left: 200px;
+	margin-left: 180px;
 	float: left;
 }
 
 #sndbut {
-	margin-left: 255px;
+	margin-left: 245px;
 }
 
 #hombut {
@@ -124,7 +127,7 @@ border: 1px dotted #aaa;
 }
 
 #tokbut {
-	margin-right: 120px;
+	margin-right: 140px;
 	float: right;
 }
 
