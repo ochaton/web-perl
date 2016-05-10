@@ -37,6 +37,57 @@ sub get_next_token {
     p $token;
 }
 
+sub send_to_db {
+    my $user_info = shift;
+    return unless defined $user_info;
+
+    my $sql_first = 'UPDATE `users` SET';
+    my $sql_inner = '';
+    my $sql_last = 'WHERE id=?';
+
+    my @sql_params;
+
+    if (defined $user_info->{nick}) {
+
+        my $sth_check = $dbh->prepare('SELECT id FROM `users` WHERE nick=?')
+            or die $dbh->errstr;
+
+        $sth_check->execute($user_info->{nick})
+            or die $sth_check->errstr;
+
+        my $ans = $sth_check->fetchrow_hashref;
+        return 0 if (defined $ans && $ans->{id} != session('user'));
+
+        $sql_inner .= ' nick=? ';
+        push @sql_params, $user_info->{nick};
+    }
+    if (defined $user_info->{email}) {
+
+        my $sth_check = $dbh->prepare('SELECT id FROM `users` WHERE email=?')
+            or die $dbh->errstr;
+
+        $sth_check->execute($user_info->{email})
+            or die $sth_check->errstr;
+
+        my $ans = $sth_check->fetchrow_hashref;
+        return 0 if (defined $ans && $ans->{id} != session('user'));
+
+
+        $sql_inner .= ' email=? ';
+        push @sql_params, $user_info->{email};
+    }
+
+    push @sql_params, session('user');
+
+    p @sql_params;
+
+    my $sql = $sql_first . $sql_inner . $sql_last;
+    my $sth = $dbh->prepare($sql) or die $dbh->errstr;
+    $sth->execute(values @sql_params) or die $sth->errstr;
+
+    1;
+}
+
 hook before => sub {
     if (!session('user') && 
             (request->dispatch_path !~ m{^/auth} && 
@@ -117,6 +168,8 @@ get '/user:id?' => sub {
 post '/user:id?' => sub {
     my $request_body = request->body();
 
+    p $request_body;
+
     unless (session('user')) {
         status 'not_found';
         redirect '/404';
@@ -132,6 +185,23 @@ post '/user:id?' => sub {
     }
     elsif ($request_body =~ m{^home_button}) {
         redirect '/';
+    }
+    elsif ($request_body =~ m{change_button=Send$}) {
+        
+        my $res;
+
+        if (param('change_nick')) {
+            $res = send_to_db({nick => param('change_nick')});
+        }
+        if (param('change_email')) {
+            $res = send_to_db({email => param('change_email')});
+        }
+        redirect '/' if ($res);
+        
+        unless ($res) {
+            session user => undef;
+            redirect '/';
+        }
     }
     else {
         redirect request->dispatch_path;

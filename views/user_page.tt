@@ -37,6 +37,20 @@
 		margin: 0;
 		outline: 0;
 	}
+	#text {
+		font-size: 18px;
+		line-height: 1.2;
+		font-weight: 700;
+		margin: 0;
+		outline: 0;
+	}
+	#user_input {
+		border: none;
+		height: 30px;
+		font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+		font-size: 13pt;
+		padding: 6px 12px;
+	}
 </style>
 <div id="user_page">
 	<div id="image">
@@ -59,6 +73,34 @@
 				<input id="tokbut" name="token_button" type="submit" value="Get New Token">
 			</p></form>
 		</section>
+		<div style="clear: both;"></div>
+	</div>
+	<div id="user_settings">
+		<section>
+			<form method="post" name="user_action"><p>
+				<table valign="center>
+					<tr">
+						<td>
+							<h1 id="text">Nick:</h1>
+						</td>
+						<td>
+							<input name="change_nick" id="user_input" placeholder="<% user_nick %>">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h1 id="text">Email:</h1>
+						</td>
+						<td>
+							<input name="change_email" id="user_input" placeholder="<% user_email %>">
+						</td>
+					</tr>
+				</table>
+				<input id="sndbut" name="change_button" value="Send" type="submit">
+			</p></form>
+		</section>
+		<div style="clear: both;"></div>
+	</div>
 		<% ELSE %>
 			<form method="post" name="user_action"><p>
 				<input id="hombut" name="home_button" value="Home" type="submit">
