@@ -174,6 +174,11 @@ get '/user:id?' => sub {
 
     unless (defined $row) {
         status 'not_found';
+        if (session('user') == param('id')) {
+            session user => undef;
+            session role => undef;
+            redirect '/';
+        }
         redirect '/404';
         return;
     }
@@ -345,6 +350,10 @@ post '/reg' => sub {
 
     session user => $row->{id};
     redirect '/user0';
+};
+
+get '/404' => sub {
+
 };
 
 dance();
