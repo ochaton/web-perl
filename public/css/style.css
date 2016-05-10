@@ -7,7 +7,7 @@ font-size: 13px;
 color: #333;
 }
 
-#text {
+#text, #msg {
 	font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
 	font-size: 13pt;
 	color: #555;

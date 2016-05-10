@@ -6,6 +6,14 @@
 	Thanks for good wiki! :)
 
 -->
+<style>
+	#msg:hover{
+		box-shadow: 0 0 5px 2px;
+	}
+</style>
+<div id="msg" style="margin-top: 100px; margin-bottom: -100px;">
+	<a href="/" style="text-decoration: none; color: inherit;"><h1 style="text-align: center">New User? Realy?! O_o</h1></a>
+</div>
 <div id="reg">
 		<form name="reg" method="POST" action="#">
 			<div style="float: left; margin-left: 8px; margin-right: 8px;">
