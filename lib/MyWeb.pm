@@ -39,7 +39,10 @@ sub get_next_token {
 
 sub send_to_db {
     my $user_info = shift;
-    return unless defined $user_info;
+    return 0 unless defined $user_info;
+    return 0 unless defined $user_info->{user_id};
+
+    p $user_info;
 
     my $sql_first = 'UPDATE `users` SET';
     my $sql_inner = '';
@@ -77,7 +80,12 @@ sub send_to_db {
         push @sql_params, $user_info->{email};
     }
 
-    push @sql_params, session('user');
+    if (session('role') == 0) {
+        push @sql_params, session('user');
+    }
+    else {
+        push @sql_params, $user_info->{user_id};   
+    }
 
     p @sql_params;
 
@@ -134,9 +142,24 @@ get '/user:id?' => sub {
     }
 
     my $mypage = undef;
+    my $myrole = undef;
 
     if (param('id') == session('user')) {
         $mypage = 'true';
+    }
+
+    my $users = {};
+    if (session('role') != 0) {
+        $myrole = 'admin';
+
+        my $sth = $dbh->prepare('SELECT * FROM `users` WHERE id!=?')
+            or die $dbh->errstr;
+
+        $sth->execute(session('user')) 
+            or die $sth->errstr;
+
+        $users = $sth->fetchall_arrayref({}) or die $sth->errstr;
+        p $users;
     }
 
     my $sql = 'SELECT * FROM `users` WHERE id=?';
@@ -162,7 +185,9 @@ get '/user:id?' => sub {
         'user_email' => $row->{'email'},
         'user_token' => $row->{'token'},
         'my_user_page' => $mypage,
-    }
+        'am_i_admin' => $myrole,
+        'users' => $users,
+    };
 };
 
 post '/user:id?' => sub {
@@ -177,6 +202,7 @@ post '/user:id?' => sub {
 
     if ($request_body =~ m{^exit_button}) {
         session user => undef;
+        session role => undef;
         redirect '/';
     } 
     elsif ($request_body =~ m{^token_button}) { 
@@ -191,15 +217,18 @@ post '/user:id?' => sub {
         my $res;
 
         if (param('change_nick')) {
-            $res = send_to_db({nick => param('change_nick')});
+            $res = send_to_db({nick => param('change_nick'), user_id => params->{id}});
         }
         if (param('change_email')) {
-            $res = send_to_db({email => param('change_email')});
+            $res = send_to_db({email => param('change_email'), user_id => params->{id}});
         }
+
+        redirect '/user' . params->{id} if (session('role'));   # if admin
         redirect '/' if ($res);
         
         unless ($res) {
             session user => undef;
+            session role => undef;
             redirect '/';
         }
     }
@@ -233,6 +262,7 @@ post '/auth' => sub {
         ) 
     {
         session user => $row->{id};
+        session role => $row->{role};
         redirect '/user' . $row->{id};
     }
     else {

@@ -51,7 +51,32 @@
 		font-size: 13pt;
 		padding: 6px 12px;
 	}
+	#user_url {
+		font-size: 14pt;
+		font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+		border: 1px solid #666;
+		margin: auto;
+		margin-bottom: 5px;
+		padding: 6px 6px;
+	}
 </style>
+<% IF am_i_admin %>
+<div id="admin_page">
+	<style>
+		#admin_sidebar {
+			display: inline-block;
+			border: 1px solid #000;
+			width: 100%;
+		}
+	</style>
+<% FOREACH user IN users %>
+	<div id="user_url">
+		<a href="/user<% user.id %>"><% user.nick %></a>&nbsp;<% user.role %>
+	</div>
+<% END %>
+
+</div>
+<% END %>
 <div id="user_page">
 	<div id="image">
 		
@@ -63,7 +88,7 @@
 		<section>
 			<h1 id="email"><big>Email: </big><% user_email %></h1>
 		</section>
-		<% IF my_user_page %>
+<% IF my_user_page %>
 		<section>
 			<h2 id="token"><big>Token: </big><% user_token %></h2>
 		</section>
@@ -101,11 +126,39 @@
 		</section>
 		<div style="clear: both;"></div>
 	</div>
-		<% ELSE %>
+<% ELSE %>
+<% IF am_i_admin %>
+	<section>
+		<h2 id="token"><big>Token: </big><% user_token %></h2>
+	</section>
+		<form method="post" name="user_action"><p>
+			<input id="hombut" name="home_button" value="Home" type="submit">
+		</p></form>
+		<div style="clear: both;"></div>
+	</div>
+	<div id="user_settings">
+		<section>
+			<form method="post" name="user_action"><p>
+				<table valign="center>
+					<tr">
+						<td>
+							<h1 id="text">Nick:</h1>
+						</td>
+						<td>
+							<input name="change_nick" id="user_input" placeholder="<% user_nick %>">
+						</td>
+					</tr>
+				</table>
+				<input id="sndbut" name="change_button" value="Send" type="submit">
+			</p></form>
+		</section>
+		<div style="clear: both;"></div>
+	</div>
+<% ELSE %>
 			<form method="post" name="user_action"><p>
 				<input id="hombut" name="home_button" value="Home" type="submit">
 			</p></form>
-		<% END %>
+<% END %>
+<% END %>
 		<div style="clear: both;"></div>
-	</div>
 </div>
